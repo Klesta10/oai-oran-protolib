@@ -5,6 +5,7 @@ enum RAN_message_type{
     INDICATION_REQUEST = 2;
     INDICATION_RESPONSE = 3;
     CONTROL = 4;
+    BER_INDICATION = 5;  // Add this new message typ
 } 
 
 enum RAN_parameter{
@@ -28,10 +29,15 @@ message RAN_indication_request{
 
 message RAN_indication_response{
     repeated RAN_param_map_entry param_map = 1;
+    repeated ue_info_m ue_info = 2;  // Add this field for UE-specific information
 }
 
 message RAN_control_request{
     repeated RAN_param_map_entry target_param_map = 1;
+}
+
+message RAN_ber_indication {
+  repeated ue_info_m ue_info = 1;  // Include the UE-specific information
 }
 
 /* MASTER RAN MESSAGE */
@@ -42,6 +48,7 @@ message RAN_message{
         RAN_indication_request ran_indication_request = 2;
         RAN_indication_response ran_indication_response = 3;
         RAN_control_request ran_control_request = 4;
+        RAN_ber_indication ran_ber_indication = 5;  // Add this message for BER indication
     }
 }
 
@@ -58,6 +65,9 @@ message ue_info_m{
     // specific ue's propoerties (these will be set by the xapp and sent to gnb)
     optional bool prop_1 = 5;
     optional float prop_2 = 6;
+    
+    optional float ber = 7;          // Add this field for BER information
+    optional bool ber_flag = 8;      // Add this field for the flag
 }
 
 message ue_list_m{
