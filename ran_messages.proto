@@ -11,8 +11,8 @@ enum RAN_message_type{
 enum RAN_parameter{
     GNB_ID = 1;
     UE_LIST = 3;
-    RAN_PARAMETER__BER = 6;          // Add this new parameter for BER
-    RAN_PARAMETER__THRESHOLD = 7;    // Add this new parameter for threshold
+    BER = 6;          // Add this new parameter for BER
+    THRESHOLD = 7;    // Add this new parameter for threshold
 }
 
 message RAN_param_map_entry{
